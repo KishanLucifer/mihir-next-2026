@@ -88,7 +88,7 @@ export default function GalleryDetail() {
 
           {photos?.length === 0 && (
             <div className="col-span-full py-20 text-center text-muted-foreground">
-              No photos in this gallery yet.
+              No photos in this gallery yet.1
             </div>
           )}
         </div>

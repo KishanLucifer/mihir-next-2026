@@ -45,7 +45,7 @@ export default defineType({
     },
     {
       name: "gallery",
-      title: "Gallery of Photographs",
+      title: "Gallery",
       type: "array",
       of: [{ type: "image" }],
       options: {
@@ -57,11 +57,21 @@ export default defineType({
       title: "Category",
       type: "reference",
       to: [{ type: "category" }],
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "isFeatured",
       title: "Is Featured",
       type: "boolean",
+    },
+    {
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: {
+        source: "title",
+      },
+      validation: (Rule) => Rule.required(),
     },
   ],
 });

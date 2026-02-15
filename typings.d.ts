@@ -3,8 +3,10 @@ import type { Image } from "sanity";
 export interface Category {
   _id: string;
   title: string;
+  name: string;
   description?: string;
   coverImage: string;
+  slug: string;
 }
 
 export interface Photo {
@@ -15,8 +17,17 @@ export interface Photo {
   location?: string;
   place?: string;
   dateTaken?: string;
-  image: Image;
+  image: string;
+  imageUrl: string;
+  url?: string;
   isFeatured?: boolean;
-  
-  category?: CategoryRef;
+  slug: string;
+  Gallery: Array;
+  category?: {
+    _id: string;
+    type: CategoryRef;
+    title: string;
+    slug: string;
+  };
+  isFeatured?: boolean;
 }

@@ -1,13 +1,9 @@
-import { CATEGORIES_QUERY } from "@/lib/sanity.queries";
+"use client";
 import { urlFor } from "@/lib/saniyty.image";
-import { Category } from "@/typings";
 import Link from "next/link";
+import type { Category } from "@/typings";
 
-interface CategoryProps {
-  categories: Category[];
-}
-
-export default function Category() {
+export default function Category({ categories }: { categories: Category[] }) {
   return (
     <>
       <section className="py-24 bg-muted/30">
@@ -15,7 +11,7 @@ export default function Category() {
           {categories.map((cat) => (
             <Link
               key={cat._id}
-              href={`/gallery/${cat._id}`}
+              href={`/gallery/${cat.slug}`}
               className="relative aspect-square overflow-hidden rounded-2xl">
               <img
                 src={urlFor(cat.coverImage).width(600).height(600).url()}

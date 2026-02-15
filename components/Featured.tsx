@@ -30,7 +30,7 @@ export default function Featured({ photos }: FeaturedProps) {
           {photos.map((photo) => (
             <Link
               key={photo._id}
-              href={`/photo/${photo._id}`}
+              href={`/photo/${photo.slug}`}
               className="group relative aspect-[4/5] overflow-hidden rounded-xl">
               <img
                 src={urlFor(photo.image).width(800).height(1000).url()}

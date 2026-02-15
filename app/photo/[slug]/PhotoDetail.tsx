@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
-// import { usePhoto, usePhotos } from "@/hooks/use-content";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, MapPin, Share2 } from "lucide-react";
 import { format } from "date-fns";
 import { Photo } from "@/typings";
 import Image from "next/image";
 import { urlFor } from "@/lib/saniyty.image";
+import Header from "@/components/Header";
 
 export default function PhotoDetail({
   photo,
@@ -15,19 +15,13 @@ export default function PhotoDetail({
   photo: Photo;
   relatedPhotos: Photo[];
 }) {
-  // if (isLoading) return <div className="h-screen bg-background" />;
-  // if (!photo)
-  //   return (
-  //     <div className="h-screen flex items-center justify-center">
-  //       Photo not found
-  //     </div>
-  //   );
-
   return (
     <div className="min-h-screen bg-black text-white">
+      <Header />
+
       {/* Close Button */}
       <Link
-        href={`/gallery/${photo.category._id}`}
+        href={`/galleries`}
         className="fixed top-24 left-6 z-50 p-3 bg-black/50 backdrop-blur-md rounded-full text-white/80 hover:text-white hover:bg-black/70 transition-all">
         <ArrowLeft className="w-6 h-6" />
       </Link>
@@ -120,96 +114,3 @@ export default function PhotoDetail({
     </div>
   );
 }
-
-// ("use client");
-
-// import Link from "next/link";
-// import { motion } from "framer-motion";
-// import { ArrowLeft, Calendar, MapPin } from "lucide-react";
-// import { format } from "date-fns";
-// import { Photo } from "@/typings";
-// import Image from "next/image";
-// import { urlFor } from "@/lib/saniyty.image";
-
-// export default function PhotoClient({
-//   photo,
-//   relatedPhotos,
-// }: {
-//   photo: Photo;
-//   relatedPhotos: Photo[];
-// }) {
-//   return (
-//     <div className="min-h-screen bg-black text-white">
-//       <Link
-//         href={`/gallery/${photo.category._id}`}
-//         className="fixed top-24 left-6 z-50 p-3 bg-black/50 backdrop-blur-md rounded-full">
-//         <ArrowLeft className="w-6 h-6" />
-//       </Link>
-
-//       {/* Image */}
-//       <div className="h-[85vh] flex items-center justify-center bg-zinc-900">
-//         <Image
-//           src={urlFor(photo.image).width(1600).url()}
-//           alt={photo.title}
-//           width={1600}
-//           height={1200}
-//           unoptimized
-//           className="max-h-full max-w-full object-contain"
-//         />
-//       </div>
-
-//       {/* Content */}
-//       <div className="container mx-auto px-4 py-12 -mt-20">
-//         <motion.div
-//           initial={{ opacity: 0, y: 30 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           className="bg-black/70 backdrop-blur-xl rounded-3xl p-10 max-w-4xl mx-auto">
-//           <h1 className="text-4xl font-bold mb-4">{photo.title}</h1>
-
-//           <div className="flex gap-6 text-white/60 mb-6">
-//             {photo.dateTaken && (
-//               <div className="flex items-center gap-2">
-//                 <Calendar size={16} />
-//                 {format(new Date(photo.dateTaken), "MMMM d, yyyy")}
-//               </div>
-//             )}
-//             {photo.location && (
-//               <div className="flex items-center gap-2">
-//                 <MapPin size={16} />
-//                 {photo.location}
-//               </div>
-//             )}
-//           </div>
-
-//           <p className="text-white/80 whitespace-pre-wrap">{photo.story}</p>
-//         </motion.div>
-
-//         {relatedPhotos?.length > 1 && (
-//           <div className="mt-24">
-//             <h3 className="text-2xl font-bold mb-8 text-center">
-//               More from this Collection
-//             </h3>
-
-//             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-//               {relatedPhotos
-//                 .filter((p) => p._id !== photo._id)
-//                 .slice(0, 4)
-//                 .map((p) => (
-//                   <Link key={p._id} href={`/photo/${p._id}`}>
-//                     <Image
-//                       src={urlFor(photo.image).width(1600).url()}
-//                       width={1600}
-//                       height={1200}
-//                       alt={p.title}
-//                       className="rounded-lg"
-//                       unoptimized
-//                     />
-//                   </Link>
-//                 ))}
-//             </div>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
