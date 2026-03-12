@@ -6,9 +6,11 @@ import { notFound } from "next/navigation";
 export default async function PhotoPage({
   params,
 }: {
-  params: { slug: string };
+  params?: Promise<{ slug: string }>;
 }) {
-  const { slug } = params;
+  // Next.js expects props.params to be a promise. We `await` it to get the actual
+  // slug object. It should always be defined for this route.
+  const { slug } = await params!;
 
   const photo = await sanityFetch<Photo | null>({
     query: `

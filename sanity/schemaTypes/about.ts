@@ -1,8 +1,8 @@
 import { defineType } from "sanity";
 
 export default defineType({
-  name: "profile",
-  title: "Profile",
+  name: "about",
+  title: "About",
   type: "document",
   fields: [
     {
@@ -23,6 +23,11 @@ export default defineType({
     {
       name: "coverImage",
       title: "Cover Image",
+      type: "image",
+    },
+    {
+      name: "logo",
+      title: "Logo",
       type: "image",
     },
     {

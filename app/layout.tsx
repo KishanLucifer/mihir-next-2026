@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
 import Header from "@/components/Header";
+import { BackgroundCanvas } from "@/components/BackgroundCanvas";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,7 +31,14 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <BackgroundCanvas />
+          {/* Header uses useSearchParams; wrap in Suspense to satisfy CSR bailout requirements */}
+          <Suspense fallback={null}>
+            <Header />
+          </Suspense>
+          {children}
+        </Providers>
       </body>
     </html>
   );

@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
+import Logo from "../public/logo/logo2.png";
 import { Menu, X, Camera } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -47,9 +49,9 @@ export default function Header() {
 
   const navLinks = [
     { id: "home", leble: "Home", href: "/" },
+    { id: "about", label: "About", href: "/about" },
     { id: "galleries", label: "Galleries", href: "/galleries" },
     { id: "videos", label: "Videos", href: "/videos" },
-    { id: "about", label: "About", href: "/about" },
     { id: "contact", label: "Contact", href: "/contact" },
   ];
   return (
@@ -65,16 +67,14 @@ export default function Header() {
       )}>
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         <Link href="/" className="group flex items-center gap-2 z-50">
-          <div className="relative w-10 h-10 flex items-center justify-center bg-primary rounded-full text-background overflow-hidden transition-transform group-hover:scale-105">
-            <Camera className="w-5 h-5" />
+          <div className="relative flex items-center justify-center rounded-full text-background overflow-hidden transition-transform group-hover:scale-105">
+            <Image src={Logo} alt="Logo" className="w-22 h-22" />
           </div>
           <span
             className={cn(
               "text-2xl font-display font-bold tracking-tight transition-colors",
-              isScrolled ? "text-foreground" : "text-white"
-            )}>
-            WildLens
-          </span>
+              isScrolled ? "text-foreground" : "text-black"
+            )}></span>
         </Link>
 
         {/* Desktop Nav */}

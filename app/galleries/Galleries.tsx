@@ -6,8 +6,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { Category, Photo } from "@/typings";
-import photo from "@/sanity/schemaTypes/photo";
-import Header from "@/components/Header";
 
 interface GalleriesProps {
   categories: Category[];
@@ -15,14 +13,9 @@ interface GalleriesProps {
   // relatedPhotos?: Photo[];
 }
 
-export default function Galleries({
-  categories,
-  photo,
-  // relatedPhotos,
-}: GalleriesProps) {
+export default function Galleries({ categories }: GalleriesProps) {
   return (
     <div className="pt-32 pb-24 min-h-screen">
-      <Header />
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -6,7 +6,6 @@ import { format } from "date-fns";
 import { Photo } from "@/typings";
 import Image from "next/image";
 import { urlFor } from "@/lib/saniyty.image";
-import Header from "@/components/Header";
 
 export default function PhotoDetail({
   photo,
@@ -17,8 +16,6 @@ export default function PhotoDetail({
 }) {
   return (
     <div className="min-h-screen bg-black text-white">
-      <Header />
-
       {/* Close Button */}
       <Link
         href={`/galleries`}

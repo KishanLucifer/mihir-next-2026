@@ -7,12 +7,15 @@ export const structure: StructureResolver = (S) =>
     .items([
       S.documentTypeListItem("photo").title("Photo"),
       S.documentTypeListItem("category").title("Categories"),
-      S.documentTypeListItem("profile").title("Profile"),
       S.documentTypeListItem("video").title("Video"),
+      S.documentTypeListItem("about").title("About"),
+      S.documentTypeListItem("contact").title("Contact"),
       S.divider(),
       ...S.documentTypeListItems().filter(
         (item) =>
           item.getId() &&
-          !["photo", "category", "profile", "video"].includes(item.getId()!)
+          !["photo", "category", "video", "about", "contact"].includes(
+            item.getId()!
+          )
       ),
     ]);
