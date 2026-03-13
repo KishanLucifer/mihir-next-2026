@@ -71,7 +71,7 @@ export function getPhotosByCategory(slug: string) {
         title,
         "slug": slug.current,
         description,
-        Gallery,
+        gallery,
         "image": image.asset->url
       }
     `,
@@ -95,6 +95,7 @@ export function getPhotoBySlug(slug: string) {
       location,
       dateTaken,
       "image": image.asset->url,
+      gallery,
       category->{
         _id,
         title,

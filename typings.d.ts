@@ -22,13 +22,8 @@ export interface Photo {
   url?: string;
   isFeatured?: boolean;
   slug: string;
-  Gallery: Array;
-  category?: {
-    _id: string;
-    type: CategoryRef;
-    title: string;
-    slug: string;
-  };
+  gallery?: Image[];
+  category?: Category;
   isFeatured?: boolean;
 }
 

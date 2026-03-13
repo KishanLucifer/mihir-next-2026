@@ -1,3 +1,4 @@
+import { getPhotoBySlug } from "@/lib/sanity.actions";
 import { sanityFetch } from "@/lib/sanity.fetch";
 import type { Photo } from "@/typings";
 import PhotoDetail from "./PhotoDetail";
@@ -12,27 +13,7 @@ export default async function PhotoPage({
   // slug object. It should always be defined for this route.
   const { slug } = await params!;
 
-  const photo = await sanityFetch<Photo | null>({
-    query: `
-      *[_type == "photo" && slug.current == $slug][0]{
-        _id,
-        title,
-        "slug": slug.current,
-        story,
-        description,
-        location,
-        dateTaken,
-        image,
-        category->{
-          _id,
-          title,
-          "slug": slug.current
-        }
-      }
-    `,
-    params: { slug },
-    tags: ["photo", slug],
-  });
+  const photo = await getPhotoBySlug(slug);
 
   if (!photo) {
     notFound();

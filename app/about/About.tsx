@@ -48,11 +48,11 @@ export default function About({ about }: Props) {
           alt="Profile Cover"
           className="w-full h-full object-cover"
         />
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background to-transparent z-20" />
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-linear-to-t from-background to-transparent z-20" />
 
         <div className="absolute bottom-0 left-0 w-full z-30 pb-12">
-          <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row items-end gap-8">
-            <div className="w-40 h-40 md:w-56 md:h-56 rounded-full border-4 border-background overflow-hidden shadow-2xl flex-shrink-0 bg-muted">
+          <div className="container mx-auto px-0 md:px-6 flex flex-col md:flex-row items-start gap-8">
+            <div className="w-40 h-40 md:w-56 md:h-56 rounded-full border-4 border-background overflow-hidden shadow-2xl shrink-0 bg-muted">
               <img
                 src={
                   profile?.avatarUrl ||
@@ -63,7 +63,7 @@ export default function About({ about }: Props) {
               />
             </div>
             <div className="mb-4">
-              <h1 className="text-5xl md:text-6xl font-display font-bold text-white mb-2">
+              <h1 className="text-5xl md:text-6xl font-display font-bold text-white mb-2 lg:mt-28">
                 {profile?.name || "The Photographer"}
               </h1>
               <p className="text-xl text-primary/90 font-medium">
@@ -115,7 +115,7 @@ export default function About({ about }: Props) {
                     variants={item}
                     key={idx}
                     className="relative pl-8">
-                    <span className="absolute -left-[21px] top-1 w-4 h-4 rounded-full bg-primary border-4 border-background" />
+                    <span className="absolute -left-5.25 top-1 w-4 h-4 rounded-full bg-primary border-4 border-background" />
                     <span className="text-primary font-bold text-sm block mb-1">
                       {achievement.year}
                     </span>
@@ -137,7 +137,7 @@ export default function About({ about }: Props) {
             {/* Random Showcase / Parallax Section */}
             <section className="py-12">
               <div className="bg-card rounded-3xl p-8 border border-white/5 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-linear-to-r from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <h3 className="text-2xl font-display font-bold mb-4 relative z-10">
                   Behind the Lens
                 </h3>

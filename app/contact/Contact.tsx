@@ -98,7 +98,7 @@ export default function Contact({ contact }: Props) {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
           {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -162,7 +162,7 @@ export default function Contact({ contact }: Props) {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}>
-            <div className="bg-card p-8 md:p-10 rounded-3xl shadow-xl border border-white/5">
+            <div className="bg-card p-8 md:p-10 rounded-3xl shadow-xl border border-white/5 max-w-lg mx-auto">
               <h3 className="text-2xl font-bold font-display mb-6">
                 Send a Message
               </h3>

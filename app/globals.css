@@ -203,6 +203,11 @@
   --radius-lg: var(--radius);
 }
 
+/* smooth scrolling for in‑page links */
+html {
+  scroll-behavior: smooth;
+}
+
 /* -------------------- */
 /* Base Styles          */
 /* -------------------- */
@@ -238,4 +243,9 @@ h6 {
 
 .text-gradient {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-accent;
+}
+
+/* enable native smooth scrolling on all pages */
+html {
+  scroll-behavior: smooth;
 }
