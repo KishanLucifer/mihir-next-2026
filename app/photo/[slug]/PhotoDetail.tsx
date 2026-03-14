@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, MapPin, Share2 } from "lucide-react";
+import { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeft, Calendar, MapPin, Share2, ChevronLeft, ChevronRight } from "lucide-react";
 import { format } from "date-fns";
 import { Photo } from "@/typings";
 import Image from "next/image";
@@ -14,6 +15,22 @@ export default function PhotoDetail({
   photo: Photo;
   relatedPhotos: Photo[];
 }) {
+  const mainImageUrl = urlFor(photo.image).width(1600).url();
+  const galleryUrls = photo.galleryUrls ?? [];
+  const allImageUrls = useMemo(
+    () => [mainImageUrl, ...galleryUrls],
+    [mainImageUrl, galleryUrls]
+  );
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const hasMultiple = allImageUrls.length > 1;
+
+  const goPrev = () => {
+    setCurrentIndex((i) => (i <= 0 ? allImageUrls.length - 1 : i - 1));
+  };
+  const goNext = () => {
+    setCurrentIndex((i) => (i >= allImageUrls.length - 1 ? 0 : i + 1));
+  };
+
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Close Button */}
@@ -23,18 +40,55 @@ export default function PhotoDetail({
         <ArrowLeft className="w-6 h-6" />
       </Link>
 
-      {/* Main Image Stage */}
+      {/* Image Carousel (main + gallery from Sanity) */}
       <div className="h-[85vh] w-full relative bg-zinc-900 flex items-center justify-center overflow-hidden">
-        <Image
-          src={urlFor(photo.image).width(1600).url()}
-          alt={photo.title}
-          width={1600}
-          height={1200}
-          unoptimized
-          className="max-h-full max-w-full object-contain shadow-2xl"
-        />
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="absolute inset-0 flex items-center justify-center"
+          >
+            <Image
+              src={allImageUrls[currentIndex]}
+              alt={currentIndex === 0 ? photo.title : `${photo.title} – image ${currentIndex + 1}`}
+              width={1600}
+              height={1200}
+              unoptimized
+              className="max-h-full max-w-full object-contain shadow-2xl select-none"
+            />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Prev / Next buttons */}
+        {hasMultiple && (
+          <>
+            <button
+              type="button"
+              onClick={goPrev}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/50 backdrop-blur-md text-white/90 hover:text-white hover:bg-black/70 transition-all border border-white/10"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-8 h-8" />
+            </button>
+            <button
+              type="button"
+              onClick={goNext}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/50 backdrop-blur-md text-white/90 hover:text-white hover:bg-black/70 transition-all border border-white/10"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-8 h-8" />
+            </button>
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 px-4 py-2 rounded-full bg-black/50 backdrop-blur-md text-sm text-white/80 border border-white/10">
+              {currentIndex + 1} / {allImageUrls.length}
+            </div>
+          </>
+        )}
+
         {/* Gradient fade at bottom */}
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
       </div>
 
       {/* Content */}
@@ -92,14 +146,14 @@ export default function PhotoDetail({
                 .map((p) => (
                   <Link
                     key={p._id}
-                    href={`/photo/${p._id}`}
+                    href={`/photo/${p.slug}`}
                     className="aspect-square rounded-lg overflow-hidden group relative">
                     <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
                     <Image
-                      src={urlFor(photo.image).width(1600).url()}
-                      width={1600}
-                      height={1200}
-                      alt={photo.title}
+                      src={p.image || "/placeholder.jpg"}
+                      width={400}
+                      height={400}
+                      alt={p.title}
                       className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                     />
                   </Link>

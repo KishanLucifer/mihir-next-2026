@@ -48,7 +48,7 @@ export function getCategoryBySlug(slug: string) {
     query: `
       *[_type == "category" && slug.current == $slug][0]{
         _id,
-        title,
+        name,
         description,
         coverImage,
         "slug": slug.current
@@ -95,7 +95,7 @@ export function getPhotoBySlug(slug: string) {
       location,
       dateTaken,
       "image": image.asset->url,
-      gallery,
+      "galleryUrls": gallery[].asset->url,
       category->{
         _id,
         title,

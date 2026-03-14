@@ -31,7 +31,7 @@ export default async function PhotoPage({
           _id,
           title,
           "slug": slug.current,
-          image
+          "image": image.asset->url
         }
       `,
       params: {

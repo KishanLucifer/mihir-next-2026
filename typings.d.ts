@@ -23,6 +23,8 @@ export interface Photo {
   isFeatured?: boolean;
   slug: string;
   gallery?: Image[];
+  /** Fetched from Sanity gallery array: gallery[].asset->url */
+  galleryUrls?: string[];
   category?: Category;
   isFeatured?: boolean;
 }
